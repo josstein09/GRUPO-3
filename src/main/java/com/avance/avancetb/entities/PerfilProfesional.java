@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "PerfilProfesional")
 public class PerfilProfesional {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPerfilProfesional;
