@@ -72,6 +72,8 @@ public class WebSecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/alertas/**").permitAll()
                         .requestMatchers("/citas/**").permitAll()
