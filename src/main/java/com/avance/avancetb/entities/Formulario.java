@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Formulario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Formulario;
+    private int idFormulario;
 
 
 
@@ -30,9 +30,8 @@ public class Formulario {
 
     }
 
-    public Formulario(int ID_Formulario, String nombre, String mensaje, String correo, Usuario usuario) {
-        this.ID_Formulario = ID_Formulario;
-
+    public Formulario(int idFormulario, String mensaje, String correo, Usuario usuario) {
+        this.idFormulario = idFormulario;
         this.mensaje = mensaje;
         this.correo = correo;
         this.usuario = usuario;
@@ -62,13 +61,11 @@ public class Formulario {
         this.mensaje = mensaje;
     }
 
-
-
-    public int getID_Formulario() {
-        return ID_Formulario;
+    public int getIdFormulario() {
+        return idFormulario;
     }
 
-    public void setID_Formulario(int ID_Formulario) {
-        this.ID_Formulario = ID_Formulario;
+    public void setIdFormulario(int idFormulario) {
+        this.idFormulario = idFormulario;
     }
 }

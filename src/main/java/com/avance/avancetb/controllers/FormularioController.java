@@ -61,7 +61,7 @@ public class FormularioController {
 
     @PutMapping("/actualizar")
     public ResponseEntity<String> actualizar (@RequestBody FormularioDTO dto){
-        Optional<Formulario> existente = service.listId(dto.getId_Formulario());
+        Optional<Formulario> existente = service.listId(dto.getIdFormulario());
 
         if (existente.isEmpty()) {
                return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -82,12 +82,14 @@ public class FormularioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
+        System.out.println("DEBUG: Se recibió el ID: " + id);
         Optional<Formulario> formulario = service.listId(id);
 
         if (formulario.isPresent()) {
             service.delete(id);
             return ResponseEntity.ok("perfil eliminado correctamente");
         } else {
+            System.out.println("DEBUG: ID no encontrado en BD");
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("no encontrado");
         }

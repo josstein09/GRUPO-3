@@ -4,17 +4,17 @@ import jakarta.persistence.Column;
 
 public class FormularioDTO {
 
-    private int Id_Formulario;
+    private int idFormulario;
     private String nombre;
     private String mensaje;
     private String correo;
 
-    public int getId_Formulario() {
-        return Id_Formulario;
+    public int getIdFormulario() {
+        return idFormulario;
     }
 
-    public void setId_Formulario(int id_Formulario) {
-        Id_Formulario = id_Formulario;
+    public void setIdFormulario(int idFormulario) {
+        this.idFormulario = idFormulario;
     }
 
     public String getNombre() {

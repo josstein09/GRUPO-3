@@ -1,7 +1,9 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.CitaDTO;
+import com.avance.avancetb.dtos.FormularioDTO;
 import com.avance.avancetb.entities.Cita;
+import com.avance.avancetb.entities.Formulario;
 import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.servicesinterfaces.ICitaService;
 import org.modelmapper.ModelMapper;
@@ -32,18 +34,11 @@ public class CitaController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<CitaDTO> registrar(@RequestBody CitaDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Cita c = m.map(dto, Cita.class);
-
-        Usuario emisor = new Usuario();
-        emisor.setIdUsuario(dto.getIdUsuario());
-        c.setUsuarioEmisor(emisor);
-
-
-
-        Cita nueva = cS.insert(c);
-        CitaDTO responseDTO = m.map(nueva, CitaDTO.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+        ModelMapper mapper=new ModelMapper();
+        Cita p=mapper.map(dto,Cita.class);
+        Cita srv=cS.insert(p);
+        CitaDTO respondeDTO = mapper.map(srv, CitaDTO.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
     }
 
     @GetMapping("/{id}")
