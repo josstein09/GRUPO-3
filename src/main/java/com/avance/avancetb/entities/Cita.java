@@ -34,6 +34,11 @@ public class Cita {
     @Column(name = "estado_cita", nullable = false)
     private String estadoCita;
 
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+
     public Cita() {
     }
 
