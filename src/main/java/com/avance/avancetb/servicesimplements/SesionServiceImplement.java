@@ -41,4 +41,9 @@ public class SesionServiceImplement implements ISesionService {
     public void delete(int id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> obtenerInformeCursosIncompletos() {
+        return repository.obtenerInformeCursosIncompletos();
+    }
 }

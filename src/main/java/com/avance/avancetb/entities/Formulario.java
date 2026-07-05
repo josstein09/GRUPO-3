@@ -8,8 +8,9 @@ public class Formulario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_Formulario;
-    @Column(name = "nombre", length = 100, nullable = false)
-    private String nombre;
+
+
+
 
     @Column(name = "mensaje", length = 100, nullable = false)
     private String mensaje;
@@ -31,7 +32,7 @@ public class Formulario {
 
     public Formulario(int ID_Formulario, String nombre, String mensaje, String correo, Usuario usuario) {
         this.ID_Formulario = ID_Formulario;
-        this.nombre = nombre;
+
         this.mensaje = mensaje;
         this.correo = correo;
         this.usuario = usuario;
@@ -61,13 +62,7 @@ public class Formulario {
         this.mensaje = mensaje;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public int getID_Formulario() {
         return ID_Formulario;

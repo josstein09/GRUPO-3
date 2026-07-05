@@ -12,8 +12,10 @@ import java.util.List;
 @Repository
 public interface IFormularioRepository extends JpaRepository<Formulario, Integer> {
 
-@Query (value = " select id_formulario, correo from formulario \n"
-        , nativeQuery = true)
-    List<String[]> FormData();
+    @Query("SELECT f.usuario.username, f.usuario.estadoCuenta, COUNT(f) " +
+            "FROM Formulario f " +
+            "GROUP BY f.usuario.username, f.usuario.estadoCuenta " +
+            "ORDER BY COUNT(f) DESC")
+    List<Object[]> obtenerReporteActividadUsuarios();
 
 }

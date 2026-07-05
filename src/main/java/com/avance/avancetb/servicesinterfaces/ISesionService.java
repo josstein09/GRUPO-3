@@ -13,6 +13,7 @@ public interface ISesionService {
     public void update(Sesion r);
     public Optional<Sesion> listId(int id);
     public void delete(int id);
+    List<Object[]> obtenerInformeCursosIncompletos ();
 
 
 }

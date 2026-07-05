@@ -1,6 +1,7 @@
 package com.avance.avancetb.controllers;
 
 
+import com.avance.avancetb.dtos.FormActividadUsuarioDTO;
 import com.avance.avancetb.dtos.FormQuery01;
 import com.avance.avancetb.dtos.FormularioDTO;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
@@ -69,7 +70,7 @@ public class FormularioController {
 
 
         Formulario formulario = existente.get();
-        formulario.setNombre(dto.getNombre());
+
         formulario.setCorreo(dto.getCorreo());
         formulario.setMensaje(dto.getMensaje());
         service.uptade(formulario);
@@ -93,23 +94,34 @@ public class FormularioController {
     }
 
 
-    @GetMapping("/query1")
-    public ResponseEntity<?> QueryData(){
-        List<String[]> fila = service.FormData();
-        List<FormQuery01> listDTO = new ArrayList<>();
+    @GetMapping("/reporteQuery01")
+    public ResponseEntity<?> buscarReporteActividad() {
 
-        if (fila.isEmpty()){
+        List<Object[]> lista = service.obtenerReporteActividadUsuarios();
+
+
+        if (lista.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros");
+                    .body("No se encontraron registros de formularios para procesar el informe.");
         }
 
-        for (String[] columna : fila){
-            FormQuery01 dto = new FormQuery01();
-            dto.setID_Formulario(Integer.parseInt(columna[0]));
-            dto.setCorreo((columna[1]));
-            listDTO.add(dto);
+
+        List<FormActividadUsuarioDTO> respuesta = new ArrayList<>();
+
+        for (Object[] columna : lista) {
+            FormActividadUsuarioDTO dto = new FormActividadUsuarioDTO();
+
+            dto.setUsername(columna[0].toString());
+            dto.setEstadoCuenta(columna[1].toString());
+
+
+            int cantidadTotal = Integer.parseInt(columna[2].toString());
+            dto.setCantidad(cantidadTotal);
+
+            respuesta.add(dto);
         }
-        return  ResponseEntity.ok((listDTO));
+        
+        return ResponseEntity.ok(respuesta);
     }
 
 }

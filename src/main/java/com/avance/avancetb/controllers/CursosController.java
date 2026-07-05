@@ -34,10 +34,13 @@ public class CursosController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<CursosDTO> registrar(@RequestBody CursosDTO dto){
-        ModelMapper m=new ModelMapper();
-        Cursos c=m.map(dto,Cursos.class);
-        Cursos cR=curS.insert(c);
-        CursosDTO respondeDTO=m.map(cR,CursosDTO.class);
+        ModelMapper m = new ModelMapper();
+        Cursos c = m.map(dto, Cursos.class);
+        PerfilProfesional perfil = new PerfilProfesional();
+        perfil.setIdPerfilProfesional(dto.getIdPerfilProfesional());
+        c.setPerfilProfesional(perfil);
+        Cursos cR = curS.insert(c);
+        CursosDTO respondeDTO = m.map(cR, CursosDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
     }
 

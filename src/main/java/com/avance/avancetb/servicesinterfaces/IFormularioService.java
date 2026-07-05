@@ -14,7 +14,7 @@ public interface IFormularioService {
     public Optional<Formulario> listId(int id);
     public void delete(int id);
 
-    public List<String[]>FormData();
+    public List<Object[]>obtenerReporteActividadUsuarios();
 
 
 }

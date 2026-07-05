@@ -2,12 +2,13 @@ package com.avance.avancetb.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Usuario") 
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -15,7 +16,7 @@ public class Usuario {
     @Column(name = "tokenUnico", length = 255, nullable = false)
     private String tokenUnico;
 
-    @Column(name = "username", length = 150, nullable = false)
+    @Column(name = "username", length = 150, nullable = false, unique = true)
     private String username;
 
     @Column(name = "dni", nullable = false)
@@ -48,7 +49,7 @@ public class Usuario {
     @Column(name = "fotoPerfil", length = 255, nullable = false)
     private String fotoPerfil;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idRol", nullable = false)
     private Rol rol;
 

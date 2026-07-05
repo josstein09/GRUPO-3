@@ -41,9 +41,10 @@ public class FormularioServiceImplement implements IFormularioService {
     }
 
     @Override
-    public List<String[]> FormData() {
-        return repository.FormData();
+    public List<Object[]> obtenerReporteActividadUsuarios() {
+        return repository.obtenerReporteActividadUsuarios();
     }
+
 
 
 }
