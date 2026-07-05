@@ -58,24 +58,24 @@ public class FormularioController {
     }
 
 
-    //@PutMapping("/actualizar")
-    //public ResponseEntity<String> actualizar (@RequestBody FormularioDTO dto){
-    //    Optional<Formulario> existente = service.listId(dto.getId_Formulario());
-//
-    //    if (existente.isEmpty()) {
-    //           return ResponseEntity.status(HttpStatus.NOT_FOUND)
-    //                   .body("perfil no encontrado");
-    //       }
-    //
-    //
-    //    Formulario formulario = existente.get();
-    //    formulario.setNombre(dto.getNombre());
-    //    formulario.setCorreo(dto.getCorreo());
-    //    formulario.setMensaje(dto.getMensaje());
-    //    service.uptade(formulario);
-    //
-    //    return ResponseEntity.ok("actualizado correctamente");
-    //}
+    @PutMapping("/actualizar")
+    public ResponseEntity<String> actualizar (@RequestBody FormularioDTO dto){
+        Optional<Formulario> existente = service.listId(dto.getId_Formulario());
+
+        if (existente.isEmpty()) {
+               return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                       .body("perfil no encontrado");
+           }
+
+
+        Formulario formulario = existente.get();
+        formulario.setNombre(dto.getNombre());
+        formulario.setCorreo(dto.getCorreo());
+        formulario.setMensaje(dto.getMensaje());
+        service.uptade(formulario);
+
+        return ResponseEntity.ok("actualizado correctamente");
+    }
 
 
 
