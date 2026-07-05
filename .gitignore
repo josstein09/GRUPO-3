@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#archivos de credenciales de Google
+# Archivos de credenciales de Google
+src/main/resources/client_secret_220844873741-8bc8o0qq5il1dc72hubeatgu9haf1f72.apps.googleusercontent.com.json
