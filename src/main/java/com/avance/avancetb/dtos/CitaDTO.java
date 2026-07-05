@@ -8,12 +8,11 @@ import java.time.LocalTime;
 public class CitaDTO {
 
     private int idCita;
-    private int idUsuarioEmisor;
-    private int idUsuarioReceptor;
     private LocalDate fechaCita;
     private String motivo;
     private LocalTime horaCita;
     private String estadoCita;
+    private int idUsuario;
 
     public int getIdCita() {
         return idCita;
@@ -23,20 +22,12 @@ public class CitaDTO {
         this.idCita = idCita;
     }
 
-    public int getIdUsuarioEmisor() {
-        return idUsuarioEmisor;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdUsuarioEmisor(int idUsuarioEmisor) {
-        this.idUsuarioEmisor = idUsuarioEmisor;
-    }
-
-    public int getIdUsuarioReceptor() {
-        return idUsuarioReceptor;
-    }
-
-    public void setIdUsuarioReceptor(int idUsuarioReceptor) {
-        this.idUsuarioReceptor = idUsuarioReceptor;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public LocalDate getFechaCita() {

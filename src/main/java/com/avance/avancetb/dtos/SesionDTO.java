@@ -1,7 +1,5 @@
 package com.avance.avancetb.dtos;
 
-import jakarta.persistence.Column;
-
 public class SesionDTO {
 
     private int ID_Sesion;

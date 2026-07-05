@@ -11,19 +11,6 @@ public class ProgresoSesionDTO {
     private boolean completa;
     private LocalDateTime fechaCompletado;
 
-    public ProgresoSesionDTO() {
-    }
-
-    public ProgresoSesionDTO(int idProgresoSesion, int idSesion, int idUsuarioCurso, int progreso, boolean completa, LocalDateTime fechaCompletado) {
-        this.idProgresoSesion = idProgresoSesion;
-        this.idSesion = idSesion;
-        this.idUsuarioCurso = idUsuarioCurso;
-        this.progreso = progreso;
-        this.completa = completa;
-        this.fechaCompletado = fechaCompletado;
-    }
-
-    // Getters y Setters
     public int getIdProgresoSesion() {
         return idProgresoSesion;
     }

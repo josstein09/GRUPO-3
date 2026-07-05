@@ -5,6 +5,7 @@ import com.avance.avancetb.dtos.PacienteOCursoDTOQuery;
 import com.avance.avancetb.dtos.PerfilProfesionalDTO;
 import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.PerfilProfesional;
+import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.servicesinterfaces.IPerfilProfesionalService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,13 @@ public class PerfilProfesionalController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<PerfilProfesionalDTO> registrar(@RequestBody PerfilProfesionalDTO dto){
-        ModelMapper m=new ModelMapper();
-        PerfilProfesional p=m.map(dto,PerfilProfesional.class);
-        PerfilProfesional pP=pSer.insert(p);
-        PerfilProfesionalDTO respondeDTO=m.map(pP,PerfilProfesionalDTO.class);
+        ModelMapper m = new ModelMapper();
+        PerfilProfesional p = m.map(dto, PerfilProfesional.class);
+        Usuario u = new Usuario();
+        u.setIdUsuario(dto.getIdUsuario());
+        p.setUsuario(u);
+        PerfilProfesional pP = pSer.insert(p);
+        PerfilProfesionalDTO respondeDTO = m.map(pP, PerfilProfesionalDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
     }
     @GetMapping("/{id}")
@@ -57,12 +61,14 @@ public class PerfilProfesionalController {
     public ResponseEntity<String> actualizar(@RequestBody PerfilProfesionalDTO dto) {
         Optional<PerfilProfesional> existente = pSer.listId(dto.getIdPerfilProfesional());
         if (existente.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("perfil no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("perfil no encontrado");
         }
         PerfilProfesional pPer = existente.get();
         pPer.setEspecialidad(dto.getEspecialidad());
         pPer.setBiografia(dto.getBiografia());
+        Usuario u = new Usuario();
+        u.setIdUsuario(dto.getIdUsuario());
+        pPer.setUsuario(u);
         pSer.update(pPer);
         return ResponseEntity.ok("perfil se actualizo correctamente");
     }
@@ -124,20 +130,4 @@ public class PerfilProfesionalController {
     }
 
 
-    @GetMapping("/reporte-especialidades")
-    public ResponseEntity<?> reporteEspecialidades() {
-        List<Object[]> lista = pSer.reporteEspecialidades();
-        if (lista.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay perfiles registrados para generar el reporte de especialidades.");
-        }
-        List<ReporteAgrupadoDTO> respuesta = new ArrayList<>();
-        for (Object[] fila : lista) {
-            ReporteAgrupadoDTO dto = new ReporteAgrupadoDTO();
-            dto.setCategoria((String) fila[0]); // El nombre de la especialidad
-            dto.setCantidad(((Number) fila[1]).intValue()); // El conteo de profesionales
-            respuesta.add(dto);
-        }
-        return ResponseEntity.ok(respuesta);
-    }
 }

@@ -1,7 +1,5 @@
 package com.avance.avancetb.dtos;
 
-import com.avance.avancetb.entities.Usuario;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
