@@ -29,7 +29,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
-        return path.equals("/login");  // ← AGREGA ESTE MÉTODO
+        return path.equals("/login");
     }
 
     @Override
