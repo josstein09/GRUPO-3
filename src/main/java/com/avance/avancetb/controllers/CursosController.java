@@ -5,6 +5,7 @@ import com.avance.avancetb.dtos.ReporteAgrupadoDTO;
 import com.avance.avancetb.entities.Cursos;
 import com.avance.avancetb.entities.PerfilProfesional;
 import com.avance.avancetb.servicesinterfaces.ICursosService;
+import com.avance.avancetb.servicesinterfaces.IUsuarioCursoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 public class CursosController {
     @Autowired
     private ICursosService curS;
+    @Autowired
+    private IUsuarioCursoService uCS;
 
     @GetMapping
     public ResponseEntity<List<CursosDTO>> listar(){
@@ -124,5 +127,9 @@ public class CursosController {
             respuesta.add(dto);
         }
         return ResponseEntity.ok(respuesta);
+    }
+    @GetMapping("/reporte")
+    public List<Object[]> getReporteInscritos() {
+        return uCS.obtenerReporteInscritos();
     }
 }

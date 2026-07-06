@@ -45,4 +45,8 @@ public class UsuarioCursoServiceImplement implements IUsuarioCursoService {
     public void delete(int id) {
         UR.deleteById(id);
     }
+
+    @Override
+    public List<Object[]> obtenerReporteInscritos() {
+        return UR.contarInscritosPorCurso();    }
 }
