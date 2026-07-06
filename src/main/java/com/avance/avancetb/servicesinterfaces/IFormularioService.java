@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IFormularioService {
     public List<Formulario> list();
     public Formulario insert(Formulario form);
-    //public void uptade(Formulario formulario);
+    public void uptade(Formulario formulario);
     public Optional<Formulario> listId(int id);
     public void delete(int id);
 

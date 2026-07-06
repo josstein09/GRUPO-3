@@ -25,10 +25,10 @@ public class FormularioServiceImplement implements IFormularioService {
         return repository.save(form);
     }
 
-    //@Override
-    //public void uptade(Formulario formulario) {
-    //    repository.save(formulario);
-    //}
+    @Override
+    public void uptade(Formulario formulario) {
+        repository.save(formulario);
+    }
 
     @Override
     public Optional<Formulario> listId(int id) {
