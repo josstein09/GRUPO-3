@@ -1,7 +1,9 @@
 package com.avance.avancetb.controllers;
 
 import com.avance.avancetb.dtos.CitaDTO;
+import com.avance.avancetb.dtos.FormularioDTO;
 import com.avance.avancetb.entities.Cita;
+import com.avance.avancetb.entities.Formulario;
 import com.avance.avancetb.entities.Usuario;
 import com.avance.avancetb.servicesinterfaces.ICitaService;
 import org.modelmapper.ModelMapper;
@@ -32,20 +34,11 @@ public class CitaController {
 
     @PostMapping("/nuevo")
     public ResponseEntity<CitaDTO> registrar(@RequestBody CitaDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Cita c = m.map(dto, Cita.class);
-
-        Usuario emisor = new Usuario();
-        emisor.setIdUsuario(dto.getIdUsuarioEmisor());
-        c.setUsuarioEmisor(emisor);
-
-        Usuario receptor = new Usuario();
-        receptor.setIdUsuario(dto.getIdUsuarioReceptor());
-        c.setUsuarioReceptor(receptor);
-
-        Cita nueva = cS.insert(c);
-        CitaDTO responseDTO = m.map(nueva, CitaDTO.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+        ModelMapper mapper=new ModelMapper();
+        Cita p=mapper.map(dto,Cita.class);
+        Cita srv=cS.insert(p);
+        CitaDTO respondeDTO = mapper.map(srv, CitaDTO.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
     }
 
     @GetMapping("/{id}")
@@ -64,26 +57,11 @@ public class CitaController {
 
     @PutMapping("/actualiza")
     public ResponseEntity<?> actualizar(@RequestBody CitaDTO dto) {
-        Optional<Cita> existente = cS.listId(dto.getIdCita());
-
-        if (existente.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede actualizar: la cita no existe.");
-        }
-
-        ModelMapper m = new ModelMapper();
-        Cita c = m.map(dto, Cita.class);
-
-        Usuario emisor = new Usuario();
-        emisor.setIdUsuario(dto.getIdUsuarioEmisor());
-        c.setUsuarioEmisor(emisor);
-
-        Usuario receptor = new Usuario();
-        receptor.setIdUsuario(dto.getIdUsuarioReceptor());
-        c.setUsuarioReceptor(receptor);
-
-        cS.update(c);
-        return ResponseEntity.ok("Cita actualizada correctamente");
+        ModelMapper mapper=new ModelMapper();
+        Cita p=mapper.map(dto,Cita.class);
+        Cita srv=cS.insert(p);
+        CitaDTO respondeDTO = mapper.map(srv, CitaDTO.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(respondeDTO);
     }
 
     @DeleteMapping("/{id}")

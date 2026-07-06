@@ -14,14 +14,6 @@ public class Cita {
     @Column(name = "id_cita")
     private int idCita;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_emisor", nullable = false)
-    private Usuario usuarioEmisor;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_receptor", nullable = false)
-    private Usuario usuarioReceptor;
-
     @Column(name = "fecha_cita", nullable = false)
     private LocalDate fechaCita;
 
@@ -34,13 +26,16 @@ public class Cita {
     @Column(name = "estado_cita", nullable = false)
     private String estadoCita;
 
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+
     public Cita() {
     }
 
     public Cita(int idCita, Usuario usuarioEmisor, Usuario usuarioReceptor, LocalDate fechaCita, String motivo, LocalTime horaCita, String estadoCita) {
         this.idCita = idCita;
-        this.usuarioEmisor = usuarioEmisor;
-        this.usuarioReceptor = usuarioReceptor;
         this.fechaCita = fechaCita;
         this.motivo = motivo;
         this.horaCita = horaCita;
@@ -53,22 +48,6 @@ public class Cita {
 
     public void setIdCita(int idCita) {
         this.idCita = idCita;
-    }
-
-    public Usuario getUsuarioEmisor() {
-        return usuarioEmisor;
-    }
-
-    public void setUsuarioEmisor(Usuario usuarioEmisor) {
-        this.usuarioEmisor = usuarioEmisor;
-    }
-
-    public Usuario getUsuarioReceptor() {
-        return usuarioReceptor;
-    }
-
-    public void setUsuarioReceptor(Usuario usuarioReceptor) {
-        this.usuarioReceptor = usuarioReceptor;
     }
 
     public LocalDate getFechaCita() {

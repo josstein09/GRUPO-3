@@ -37,7 +37,6 @@ public class SesionController {
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<Sesion> rol = service.listId(id);
-
         if (rol.isPresent()) {
             SesionDTO dto = m.map(rol.get(), SesionDTO.class);
             return ResponseEntity.ok(dto);
@@ -58,20 +57,14 @@ public class SesionController {
 
     @PutMapping("/actualizar") //falta ingresar los demas atributos
     public ResponseEntity<String> actualizar(@RequestBody SesionDTO dto) {
-
         Optional<Sesion> existente = service.listId(dto.getID_Sesion());
         if (existente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Sala no encontrada");
         }
-
-
         Sesion ro = existente.get();
-
         ro.setID_Sesion(dto.getID_Sesion());
-
         service.update(ro);
-
         return ResponseEntity.ok("Rol actualizado correctamente");
     }
 
@@ -99,14 +92,11 @@ public class SesionController {
         List<SesionInformeCursoDTO> respuesta = new ArrayList<>();
         for (Object[] columna : lista) {
             SesionInformeCursoDTO dto = new SesionInformeCursoDTO();
-
             dto.setNombreCurso(columna[0].toString());
             dto.setTipoCurso(columna[1].toString());
             dto.setTotalSesiones(((Number) columna[2]).intValue());
-
             respuesta.add(dto);
         }
-
         return ResponseEntity.ok(respuesta);
     }
 

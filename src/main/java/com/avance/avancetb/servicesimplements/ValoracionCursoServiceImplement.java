@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ValoracionCursoServiceImplement implements IValoracionCursoService {
@@ -17,8 +18,6 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
     @Autowired
     private IValoracionCursoRepository VCR;
 
-    @Autowired
-    private IUsuarioCursoRepository UCR;
 
     @Override
     public List<ValoracionCurso> list() {
@@ -26,51 +25,22 @@ public class ValoracionCursoServiceImplement implements IValoracionCursoService 
     }
 
     @Override
-    public ValoracionCurso listId(int id) {  // ← Corregido: listId (no Listid)
-        return VCR.findById(id).orElse(null);
+    public ValoracionCurso insert(ValoracionCurso vC) {
+        return VCR.save(vC);
     }
 
     @Override
-    public ValoracionCurso Create(ValoracionCursoDTO vc) {
-        UsuarioCurso uc = UCR.findById(vc.getIdUsuarioCurso()).orElse(null);
-
-        if (uc == null) {
-            throw new RuntimeException("El registro Usuario-Curso no existe con ID: " + vc.getIdUsuarioCurso());
-        }
-
-        ValoracionCurso newEntity = new ValoracionCurso(
-                vc.getIdValoracion(),
-                uc,
-                vc.getFechaValoracion(),
-                vc.getCalificacion(),
-                vc.getComentario()
-        );
-
-        return VCR.save(newEntity);
+    public Optional<ValoracionCurso> listId(int id) {
+        return VCR.findById(id);
     }
 
     @Override
-    public ValoracionCurso Delete(int id) {
-        ValoracionCurso vc = this.listId(id);  // ← Corregido: listId
-        if (vc == null) {
-            throw new RuntimeException("La valoración no existe.");
-        }
-        VCR.delete(vc);
-        return vc;
+    public void update(ValoracionCurso v) {
+        VCR.save(v);
     }
 
     @Override
-    public ValoracionCurso Update(int id, ValoracionCurso vcActualizada) {
-        ValoracionCurso vcExistente = this.listId(id);  // ← Corregido: listId
-
-        if (vcExistente == null) {
-            return null;
-        }
-
-        vcExistente.setFechaValoracion(vcActualizada.getFechaValoracion());
-        vcExistente.setCalificacion(vcActualizada.getCalificacion());
-        vcExistente.setComentario(vcActualizada.getComentario());
-
-        return VCR.save(vcExistente);
+    public void delete(int id) {
+        VCR.deleteById(id);
     }
 }
