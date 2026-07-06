@@ -21,4 +21,7 @@ public interface IEstadoEmocionalRepository extends JpaRepository<EstadoEmociona
             "GROUP BY dia, TO_CHAR(fecha_registro, 'D') " +
             "ORDER BY TO_CHAR(fecha_registro, 'D')", nativeQuery = true)
     List<Object[]> reporteSemanalPorUsuario(@Param("idUsuario") int idUsuario);
+
+    @Query("SELECT CAST(e.fechaRegistro AS date), AVG(e.nivelBienestar) FROM EstadoEmocional e GROUP BY CAST(e.fechaRegistro AS date) ORDER BY CAST(e.fechaRegistro AS date) ASC")
+    List<Object[]> obtenerTendenciaEmocional();
 }

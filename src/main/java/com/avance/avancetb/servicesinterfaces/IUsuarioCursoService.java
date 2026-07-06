@@ -11,5 +11,6 @@ public interface IUsuarioCursoService {
     public Optional<UsuarioCurso> listId(int id);
     public void update(UsuarioCurso u);
     public void delete(int id);
+    public List<Object[]>obtenerReporteInscritos() ;
 }
 

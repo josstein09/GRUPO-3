@@ -65,4 +65,9 @@ public class EstadoEmocionalServiceImplement implements IEstadoEmocionalService 
     public List<Object[]> obtenerReporteSemanal(int idUsuario) {
         return eeR.reporteSemanalPorUsuario(idUsuario);
     }
+
+    @Override
+    public List<Object[]> obtenerTendenciaEmocional() {
+        return eeR.obtenerTendenciaEmocional();
+    }
 }

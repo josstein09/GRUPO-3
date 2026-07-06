@@ -15,4 +15,5 @@ public interface IEstadoEmocionalService {
     // Métodos personalizados de las HU
     public List<EstadoEmocional> buscarHistorialPorUsuario(int idUsuario);
     public List<Object[]> obtenerReporteSemanal(int idUsuario);
+    public List<Object[]>obtenerTendenciaEmocional();
 }

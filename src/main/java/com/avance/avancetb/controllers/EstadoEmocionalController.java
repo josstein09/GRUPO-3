@@ -72,4 +72,8 @@ public class EstadoEmocionalController {
         }
         return listaDTO;
     }
+    @GetMapping("/reporte")
+    public List<Object[]> getReporteTendencia() {
+        return eeS.obtenerTendenciaEmocional();
+    }
 }
